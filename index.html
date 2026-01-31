@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xfedziak.pl</title>
+    <meta name="description" content="Profesjonalne grafiki">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        bg: {
+                            main: '#000000', 
+                            card: '#09090b', 
+                        },
+                        primary: {
+                            DEFAULT: '#8b5cf6', 
+                            dark: '#7c3aed',   
+                            glow: 'rgba(139, 92, 246, 0.5)'
+                        },
+                        secondary: {
+                            DEFAULT: '#d946ef', 
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-gradient': 'radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.15) 0%, rgba(0, 0, 0, 0) 70%)',
+                        'card-gradient': 'linear-gradient(180deg, rgba(24, 24, 27, 0.5) 0%, rgba(9, 9, 11, 0.5) 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #000000;
+            color: #f4f4f5; 
+            overflow-x: hidden;
+        }
+
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+
+        .glass {
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-glass {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #a78bfa, #e879f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glow-hover:hover {
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.3);
+            border-color: rgba(167, 139, 250, 0.3);
+        }
+
+        #imageModal {
+            transition: opacity 0.3s ease;
+        }
+        
+        ::selection {
+            background: #8b5cf6;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="fixed w-full top-0 z-50 nav-glass transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#" class="font-heading text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                <div class=>
+                </div>
+                <span class="text-violet-500">xfendziak</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#hero" class="text-sm font-medium text-zinc-400 hover:text-white transition">Start</a>
+                <a href="#services" class="text-sm font-medium text-zinc-400 hover:text-white transition">Usługi</a>
+                <a href="#about" class="text-sm font-medium text-zinc-400 hover:text-white transition">O mnie</a>
+                <a href="#portfolio" class="text-sm font-medium text-zinc-400 hover:text-white transition">Portfolio</a>
+                <a href="#testimonials" class="text-sm font-medium text-zinc-400 hover:text-white transition">Opinie</a>
+            </nav>
+            <div class="hidden md:block">
+                <a href="https://discord.gg/zU9tm8pc3R" class="px-6 py-2.5 border border-violet-500/50 text-white text-sm font-bold rounded-full hover:bg-violet-600 hover:border-violet-600 transition shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+                    Discord
+                </a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-zinc-300 hover:text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-950 border-b border-zinc-800 absolute w-full left-0 top-20">
+            <div class="flex flex-col p-4 space-y-4">
+                <a href="#hero" class="block text-zinc-300 hover:text-violet-400">Start</a>
+                <a href="#services" class="block text-zinc-300 hover:text-violet-400">Usługi</a>
+                <a href="#about" class="block text-zinc-300 hover:text-violet-400">O mnie</a>
+                <a href="#portfolio" class="block text-zinc-300 hover:text-violet-400">Portfolio</a>
+                <a href="#testimonials" class="block text-zinc-300 hover:text-violet-400">Opinie</a>
+                <a href="#contact" class="block text-violet-400 font-bold">Kontakt</a>
+            </div>
+        </div>
+    </header>
+    <section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-bg-main">
+        <div class="absolute top-1/4 right-0 w-[600px] h-[600px] bg-violet-900/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-fuchsia-900/10 rounded-full blur-[100px] -z-10"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div data-aos="fade-down" data-aos-duration="800">
+                    <span class="">             
+                    </span>
+                </div>
+                                <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8" data-aos="fade-up" data-aos-delay="100">
+                    <span class="text-gradient">Design dla Twórców Jutra</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                    Profesjonalne grafiki do Minecrafta: miniatury, rendery i branding. Pomagam YouTuberom wyróżnić się na karcie głównej i budować zasięgi, które zostają na dłużej.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition shadow-lg shadow-violet-900/50 flex items-center justify-center gap-2 group">
+                        Zobacz moje prace
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="https://discord.gg/zU9tm8pc3R" class="w-full sm:w-auto px-8 py-4 bg-transparent border border-zinc-700 hover:border-zinc-500 text-white font-semibold rounded-full transition hover:bg-zinc-800/50">
+                        Napisz do mnie
+                    </a>
+                </div>
+    </section>
+    <section id="services" class="py-24 bg-black relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6" data-aos="fade-up">
+                <div class="max-w-2xl">
+                    <h2 class="font-heading text-3xl md:text-5xl font-bold mb-4">Moje <span class="text-violet-500">Specjalizacje</span></h2>
+                    <p class="text-zinc-400 text-lg">Jako niezależny twórca, skupiam się na jakości i detalu w każdym pikselu.</p>
+                </div>
+                <a href="https://discord.gg/zU9tm8pc3R" class="text-violet-400 hover:text-violet-300 font-medium flex items-center gap-2 transition">
+                    Zapytaj o wycenę <i class="fa-solid fa-chevron-right text-xs"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-2xl group hover:bg-zinc-900/50 transition duration-300 border border-zinc-800 hover:border-violet-500/30" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-14 h-14 bg-violet-900/20 rounded-xl flex items-center justify-center mb-6 text-violet-400 group-hover:scale-110 transition duration-300 border border-violet-500/10">
+                        <i class="fa-solid fa-vector-square text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Miniatury</h3>
+                    <p class="text-zinc-400 leading-relaxed mb-6">
+Projektuję miniatury, które realnie zwiększają klikalność Twoich filmów. Łączę dopracowane rendery postaci z gry z czytelnym i agresywnym liternictwem.
+                    </p>
+                    <ul class="space-y-2 text-sm text-zinc-500">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-violet-500"></i> Storytelling wizualny</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-violet-500"></i>Rendery 3D postaci</li>
+                    </ul>
+                </div>
+                <div class="glass p-8 rounded-2xl group hover:bg-zinc-900/50 transition duration-300 border border-zinc-800 hover:border-fuchsia-500/30" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-fuchsia-900/20 rounded-xl flex items-center justify-center mb-6 text-fuchsia-400 group-hover:scale-110 transition duration-300 border border-fuchsia-500/10">
+                        <i class="fa-solid fa-laptop-code text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Branding Kanału i Serwera</h3>
+                    <p class="text-zinc-400 leading-relaxed mb-6">
+Tworzę unikalne znaki i systemy wizualne, które wyróżniają Twoją markę na tle innych twórców. Minimalizm połączony z gamingowym charakterem.
+                    </p>
+                    <ul class="space-y-2 text-sm text-zinc-500">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-fuchsia-500"></i> Logo w klimacie Minecraft</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-fuchsia-500"></i> Bannery na YouTube i Twitch</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-fuchsia-500"></i>Identyfikacja serwerów MC</li>
+                    </ul>
+                </div>
+                <div class="glass p-8 rounded-2xl group hover:bg-zinc-900/50 transition duration-300 border border-zinc-800 hover:border-purple-500/30" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-purple-900/20 rounded-xl flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 transition duration-300 border border-purple-500/10">
+                        <i class="fa-solid fa-image text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Social Media & Druk</h3>
+                    <p class="text-zinc-400 leading-relaxed mb-6">
+                        Przygotowuję spójne materiały, które dopełniają Twój wizerunek w sieci. Od postów na Discorda po grafiki promocyjne i banery reklamowe.
+                    </p>
+                    <ul class="space-y-2 text-sm text-zinc-500">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-500"></i>Grafiki na Discord</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-500"></i>Layouty sklepów serwerowych</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-500"></i>Materiały promocyjne</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-bg-card border-y border-zinc-900">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="w-full lg:w-1/2 relative" data-aos="fade-right">
+                    <div class="absolute -inset-4 bg-gradient-to-tr from-violet-600 to-fuchsia-600 rounded-full blur-2xl opacity-20"></div>
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-zinc-800">
+                        <img src="https://i.imgur.com/VRE3pYy.jpeg" alt="" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700">
+                        <div class="absolute bottom-6 left-6 right-6 bg-black/80 backdrop-blur-md p-6 rounded-xl border border-zinc-700">
+                            <div class="flex items-center gap-4">
+                                <div class="text-3xl font-bold text-white">1+</div>
+                                <div class="text-xs text-zinc-400">Lat doświadczenia <br> w branży kreatywnej</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2" data-aos="fade-left">
+                    <h4 class="text-violet-500 font-bold tracking-wider uppercase mb-2 text-sm">O mnie</h4>
+                    <h2 class="font-heading text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">Nie szukasz agencji. Szukasz partnera w designie.</h2>
+                    <p class="text-zinc-400 mb-6 text-lg leading-relaxed">
+                       Współpraca ze mną to krótka ścieżka: bezpośredni kontakt, brak głuchych telefonów i moje pełne zaangażowanie. Wierzę, że design to nie tylko estetyka, ale przede wszystkim skuteczne narzędzie do osiągania Twoich celów biznesowych.
+   <p class="text-zinc-400 mb-6 text-lg leading-relaxed">
+Moja metoda jest prosta: słucham potrzeb, analizuję rynek, a potem projektuję rozwiązania skrojone pod Twój biznes. Stawiam na czysty, nowoczesny styl, który buduje profesjonalny wizerunek Twojej marki.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-8 pt-4 border-t border-zinc-800">
+                        <div>
+                            <span class="block text-3xl font-bold text-white mb-1">20+</span>
+                            <span class="text-sm text-zinc-500">Zrealizowanych projektów</span>
+                        </div>
+                        <div>
+                            <span class="block text-3xl font-bold text-white mb-1">100%</span>
+                            <span class="text-sm text-zinc-500">Terminowości</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+              
+    <section id="portfolio" class="py-24 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="font-heading text-3xl md:text-5xl font-bold mb-4">Wybrane <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">Projekty</span></h2>
+                <p class="text-zinc-400 text-lg">Zobacz, co ostatnio stworzyłem. Każdy projekt to inna historia i wyzwanie.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer h-80 border border-zinc-900" data-aos="fade-up" onclick="openModal('https://i.imgur.com/h0R6tIh.png', 'Miniaturka')">
+                    <img src="https://i.imgur.com/h0R6tIh.png" alt="Work" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300 delay-100">Miniaturka</h3>
+                    </div>
+                </div>
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer h-80 border border-zinc-900" data-aos="fade-up" data-aos-delay="100" onclick="openModal('https://i.imgur.com/qHw8uS7.png', 'Miniaturka')">
+                    <img src="https://i.imgur.com/qHw8uS7.png" alt="Work" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300 delay-100">Miniaturka</h3>
+                    </div>
+                </div>
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer h-80 border border-zinc-900" data-aos="fade-up" data-aos-delay="200" onclick="openModal('https://i.imgur.com/vcWSW9j.png', 'Miniaturka')">
+                    <img src="https://i.imgur.com/vcWSW9j.png" alt="Work" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300 delay-100">Miniaturka</h3>
+                    </div>
+                </div>
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer h-80 border border-zinc-900" data-aos="fade-up" onclick="openModal('https://i.imgur.com/gdUKvc7.png', 'Miniaturka')">
+                    <img src="https://i.imgur.com/gdUKvc7.png" alt="Work" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300 delay-100">Miniaturka</h3>
+                    </div>
+                </div>
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer h-80 border border-zinc-900" data-aos="fade-up" data-aos-delay="100" onclick="openModal('https://i.imgur.com/RPXKS3m.png', 'Profilowe')">
+                    <img src="https://i.imgur.com/RPXKS3m.png" alt="Work" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300 delay-100">Profilowe</h3>
+                    </div>
+                </div>
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer h-80 border border-zinc-900" data-aos="fade-up" data-aos-delay="200" onclick="openModal('https://i.imgur.com/vsX8jIG.png', 'Miniaturka')">
+                    <img src="https://i.imgur.com/vsX8jIG.png" alt="Work" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <h3 class="text-xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300 delay-100">Miniaturka</h3>
+                    </div>
+                </div>
+            </div>
+    <div id="imageModal" class="fixed inset-0 z-[60] bg-black/95 hidden items-center justify-center opacity-0 pointer-events-none backdrop-blur-sm">
+        <div class="relative max-w-5xl w-full mx-4 p-2">
+            <button onclick="closeModal()" class="absolute -top-12 right-0 text-zinc-400 text-3xl hover:text-white transition focus:outline-none">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="rounded-lg overflow-hidden shadow-2xl shadow-violet-900/20 bg-zinc-900 border border-zinc-800">
+                <img id="modalImage" src="" alt="Full Project" class="w-full h-auto max-h-[80vh] object-contain">
+                <div class="p-6 bg-zinc-900 border-t border-zinc-800">
+                    <h3 id="modalTitle" class="text-xl font-bold text-white"></h3>
+                    <p class="text-zinc-500 text-sm mt-1">Realizacja 2025</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-black py-16 w-full relative overflow-hidden border-t border-gray-900">
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-64 h-64 bg-purple-900/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="container mx-auto px-4 flex flex-col items-center justify-center relative z-10">   
+            <h2 class="fade-in-element text-4xl md:text-5xl font-bold mb-6 tracking-tight animate-glow bg-clip-text text-transparent bg-gradient-to-b from-purple-500 to-purple-800" style="animation-delay: 0.1s;">
+                xfedziak
+            </h2>
+            <div class="fade-in-element w-16 h-0.5 bg-purple-900/50 rounded-full mb-6" style="animation-delay: 0.3s;"></div>
+            <p class="fade-in-element text-sm text-gray-500 font-light tracking-wide flex items-center gap-1" style="animation-delay: 0.5s;">
+                Wykonane przez 
+                <a href="https://xfazi-m.github.io/portfolio/" target="_blank" rel="noopener noreferrer" 
+                   class="group relative inline-block text-gray-400 hover:text-purple-400 transition-colors duration-500 font-medium ml-1">
+                    x_fazi
+                    <span class="absolute -bottom-1 left-0 w-0 h-px bg-purple-500 transition-all duration-500 group-hover:w-full">
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars-staggered');
+            } else {
+                icon.classList.remove('fa-bars-staggered');
+                icon.classList.add('fa-xmark');
+            }
+        });
+
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileBtn.querySelector('i').classList.remove('fa-xmark');
+                mobileBtn.querySelector('i').classList.add('fa-bars-staggered');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-lg', 'bg-opacity-95');
+                nav.classList.replace('h-20', 'h-16');
+            } else {
+                nav.classList.remove('shadow-lg', 'bg-opacity-95');
+                nav.classList.replace('h-16', 'h-20');
+            }
+        });
+
+
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+
+        function openModal(imageSrc, title) {
+            modalImg.src = imageSrc;
+            modalTitle.innerText = title;
+            
+            modal.classList.remove('hidden');
+
+            setTimeout(() => {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.classList.add('flex');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+            document.body.style.overflow = 'auto';
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
